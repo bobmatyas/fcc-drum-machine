@@ -1,0 +1,193 @@
+class DrumMachine extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { soundDescription: '' }
+    this.playSound = this.playSound.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  
+  
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyPress);
+  }
+  
+  playSound(sound) {
+    console.log(`play sound clicked`);
+    console.log(`sound passed in: ${sound}`);
+    switch (sound) {
+      case 'q':
+        this.audioRefQ.play();
+        this.setState({
+          soundDescription: 'bump'
+        })
+        break;
+      case 'w':
+        this.setState({
+          soundDescription: 'card match'
+        }) 
+        this.audioRefW.play();
+        break;
+      case 'e':
+        this.audioRefE.play();
+        this.setState({
+          soundDescription: 'explosion'
+        }) 
+        break;
+      case 'a':
+        this.audioRefA.play();
+        this.setState({
+          soundDescription: 'flame ball'
+        }) 
+        break;
+      case 's':
+        this.audioRefS.play();
+        this.setState({
+          soundDescription: 'froggy hop'
+        }) 
+        break;
+      case 'd':
+        this.audioRefD.play();
+        this.setState({
+          soundDescription: 'jumping'
+        }) 
+        break;
+      case 'z':
+        this.audioRefZ.play();
+        this.setState({
+          soundDescription: 'shell'
+        }) 
+        break;
+      case 'x':
+        this.audioRefX.play();
+        this.setState({
+          soundDescription: 'squish'
+        }) 
+        break;
+      case 'c':
+        this.audioRefC.play();
+        this.setState({
+          soundDescription: 'wrong card'
+        }) 
+        break;
+      default:
+        break;
+    }
+  }
+  
+  handleKeyPress = event => {
+    switch(event.keyCode) {
+      case 81:
+        this.playSound('q');
+        break;
+      case 87:
+        this.playSound('w');
+        break;
+      case 69:
+        this.playSound('e');
+        break;
+      case 65:
+        this.playSound('a');
+        break;
+      case 83:
+        this.playSound('s');
+        break;
+      case 68:
+        this.playSound('d');
+        break;
+      case 90:
+        this.playSound('z');
+        break;
+      case 88:
+        this.playSound('x');
+        break;
+      case 67:
+        this.playSound('c');
+        break;
+      default:
+        break;
+    }
+  };
+  
+  render() {
+    return(
+      <div onKeyDown={this.handleKey} id="drum-machine" class="drum__machine">
+      
+        <DrumMachineHeader />
+
+        <div class="keypad__holder nes-container is-rounded">
+            
+        <button type="button" class="drum-pad nes-btn is-primary" id="Q" onClick={()=>this.playSound('q')}>
+    Q
+        <audio ref={(q) => {this.audioRefQ = q}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/bump.mp3" class="clip" id="Q" />
+        </button>
+          
+                 <button type="button" class="drum-pad nes-btn is-primary" id="W" onClick={()=>this.playSound('w')}>
+    W
+        <audio ref={(w) => {this.audioRefW = w}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/card_match.mp3" class="clip" id="W" />
+        </button>
+ 
+                 <button type="button" class="drum-pad nes-btn is-primary" id="E" onClick={()=>this.playSound('e')}>
+    E
+        <audio ref={(e) => {this.audioRefE = e}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/explosion.mp3" class="clip" id="E" />
+        </button>
+
+                  <button type="button" class="drum-pad nes-btn is-primary" id="A" onClick={()=>this.playSound('a')}>
+    A
+        <audio ref={(a) => {this.audioRefA = a}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/flame_ball.mp3" class="clip" id="A" />
+        </button>
+ 
+                  <button type="button" class="drum-pad nes-btn is-primary" id="S" onClick={()=>this.playSound('s')}>
+    S
+        <audio ref={(s) => {this.audioRefS = s}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/froggy_hop.mp3" class="clip" id="S" />
+        </button>
+
+                  <button type="button" class="drum-pad nes-btn is-primary" id="D" onClick={()=>this.playSound('d')}>
+    D
+        <audio ref={(d) => {this.audioRefD = d}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/jumping.mp3" class="clip" id="D" />
+        </button>
+
+                  <button type="button" class="drum-pad nes-btn is-primary" id="Z" onClick={()=>this.playSound('z')}>
+    Z
+        <audio ref={(z) => {this.audioRefZ = z}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/shell.mp3" class="clip" id="Z" />
+        </button>
+
+                  <button type="button" class="drum-pad nes-btn is-primary" id="X" onClick={()=>this.playSound('x')}>
+    X
+        <audio ref={(x) => {this.audioRefX = x}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/squish.mp3" class="clip" id="X" />
+        </button>
+
+
+                  <button type="button" class="drum-pad nes-btn is-primary" id="C" onClick={()=>this.playSound('c')}>
+    C
+        <audio ref={(c) => {this.audioRefC = c}} src="https://bobmatyas.github.io/fcc-drum-machine/sounds/wrong_card.mp3" class="clip" id="C" />
+        </button>
+          
+        </div>    
+        <DrumMachineSoundDisplay soundDescription={this.state.soundDescription}  />
+      </div>
+    )
+  }
+}
+
+function DrumMachineHeader () {
+  return(
+    <div class="nes-container is-dark">
+      <div class="drum__machine__logo"><i class="nes-mario"></i>  <h1>Drum Machine</h1>
+      </div>
+  </div>
+
+  );
+}
+
+function DrumMachineSoundDisplay(props) {
+  
+  return (
+      <div id="display" class="nes-container is-dark with-title">
+  <p class="title">Sound Test</p>
+  <p>{props.soundDescription}</p>
+</div>
+  );
+}
+
+ReactDOM.render(<DrumMachine />, document.getElementById('app'));
+

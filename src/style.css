@@ -1,0 +1,25 @@
+body {
+  background-color: blue;
+}
+.keypad__holder {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #fff;
+}
+
+
+.drum__machine {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.drum__machine__logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.nes-container>:last-child { margin-bottom: inherit; 
+}
